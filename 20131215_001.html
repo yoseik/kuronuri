@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{Title}</title>
+        <meta name="color:Background" content="#000"/>
+        <meta name="color:Text" content="#FF24E5"/>
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        <link rel="stylesheet" type="text/css" href="http://static.tumblr.com/youzfzy/aoFmxxw78/yui-cssreset.css">
+        <style>
+            html {
+                background-color: {color:Background};
+                color: #6e6e6e;
+            }
+            a {
+                text-decoration: none;
+                color: {color:Text};
+                outline: none;
+            }
+            #container {
+                margin: 0 auto;
+                width: 1280px;
+            }
+            #header {
+                margin: 0 auto;
+                width: 100%;
+                height: 200px;
+                background-color: {color:Background};
+                position: fixed;
+                top: 0;
+                left: 0;
+            }
+            #navigation {
+                margin-bottom: 600px;
+            }
+            #footer {
+                margin: 0 auto;
+                width: 100%;
+                height: 200px;
+                background-color: {color:Background};
+                position: fixed;
+                bottom: 0;
+                left: 0;
+            }
+            #menuopener {
+                width: 16px;
+                height: 16px;
+                text-align: center;
+                line-height: 16px;
+                background-color: #363636;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 999;
+            }
+            #menu {
+                width: 100%;
+                height: 120px;
+                background-color: {color:Text};
+                z-index: 100;
+                display: none;
+            }
+                #portrait {
+                    margin: 0 auto;
+                    padding: 0;
+                    width: 64px;
+                }
+                #portrait img {
+                    vertical-align: text-bottom;
+                }
+            #posts {
+                margin: 0 auto 80px auto;
+                padding-top: 100%;
+                width: 1280px;
+                background-color: {color:Background};
+            }
+                .post {
+                    margin: 0 auto 600px auto;
+                    width: 600px;
+                    text-align: center;
+                }
+                .permapost {
+                    margin: 0 auto 300px auto;
+                    width: 1280px;
+                    text-align: center;
+                }
+                .permalink {
+                    margin: 0 auto;
+                    width: 500px;
+                    font-size: 12px;
+                    color: #9A9A9A;
+                    text-align: left;
+                    display: block;
+                }
+                    .photo img {
+                        min-width: 500px;
+                        max-width: 600px;
+                    }
+                    .permapost img {
+                        min-width: 500px;
+                        max-width: 1280px;
+                    }
+                    .quote blockquote {
+                        font-weight: 700;
+                        font-size: 36px;
+                    }
+
+                    .notes, .rblgfrom, .source {
+                        margin: 0 auto;
+                        width: 500px;
+                        text-align: left;
+                        font-size: 14px;
+                    }
+                    .rblgfrom {
+                        margin-bottom: 24px;
+                    }
+                    .avatar_frame {
+                        margin-right: 8px;
+                    }
+                        .avatar_frame img {
+                            min-width: 16px;
+                            vertical-align: text-bottom;
+                        }
+                        img.avatar {
+                            width: 16px;
+                            vertical-align: text-bottom;
+                        }
+                    .more_notes_link_container {
+                        margin: 12px 0 0 0;
+                        padding: 8px 0;
+                        background-color: {color:Background};
+                        line-height: 14px;
+                    }
+                        .more_notes_link_container a {
+                            display: block;
+                        }
+            {CustomCSS}
+        </style>
+
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="menuopener">
+                    <a href="#">+</a>
+                </div>
+                <div id="menu">
+                    <div id="portrait">
+                    <h1><a href="{BlogURL}"><img src="{PortraitURL-64}" alt="{Title}"></a></h1>
+                    </div>
+                </div>
+            </div>
+            <ol id="posts">
+                {block:Posts}
+<!-- =================== for index page =================== -->
+                    {block:IndexPage}
+                        {block:Text}
+                            <li class="post text">
+                                {block:Title}
+                                    <h3><a href="{Permalink}">{Title}</a></h3>
+                                {/block:Title}{Body}
+                            </li>
+                        {/block:Text}
+                        {block:Photo}
+                            <li class="post photo">
+                                <a href="{Permalink}"><img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/></a>
+                            </li>
+                        {/block:Photo}
+                        {block:Panorama}
+                            <li class="post panorama">
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+                                {LinkCloseTag}
+                            </li>
+                        {/block:Panorama}
+                        {block:Photoset}
+                            <li class="post photoset">
+                                <div class="photoset">
+                                {Photoset-500}
+                                </div>
+                                <a href="{permalink}" class="permalink">notes</a>
+                            </li>
+                        {/block:Photoset}
+                        {block:Quote}
+                            <li class="post quote">
+                                <a href="{Permalink}"><blockquote>"{Quote}"</blockquote></a>
+                                <div class="source">
+                                        {Source}
+                                </div>
+                            </li>
+                        {/block:Quote}
+                        {block:Link}
+                            <li class="post link">
+                                <a href="{URL}" class="link" {Target}>{Name}</a>
+
+                                {block:Description}
+                                    <div class="description">{Description}</div>
+                                {/block:Description}
+                                <a href="{permalink}" class="permalink">notes</a>
+                            </li>
+                        {/block:Link}
+                        {block:Chat}
+                            <li class="post chat">
+                                {block:Title}
+                                    <h3><a href="{Permalink}">{Title}</a></h3>
+                                {/block:Title}
+
+                                <ul class="chat">
+                                    {block:Lines}
+                                        <li class="{Alt} user_{UserNumber}">
+                                            {block:Label}
+                                                <span class="label">{Label}</span>
+                                            {/block:Label}{Line}
+                                        </li>
+                                    {/block:Lines}
+                                </ul>
+                            </li>
+                        {/block:Chat}
+                        {block:Video}
+                            <li class="post video">
+                                {Video-500}
+                                <a href="{permalink}" class="permalink">notes</a>
+                            </li>
+                        {/block:Video}
+                        {block:Audio}
+                            <li class="post audio">
+                                {AudioPlayerBlack}
+                                <a href="{permalink}" class="permalink">notes</a>
+                            </li>
+                        {/block:Audio}
+                    {/block:IndexPage}
+                    
+<!-- =================== for permalink pages =================== -->
+                    {block:PermalinkPage}
+                        {block:Text}
+                            <li class="permapost text">
+                                {block:Title}
+                                    <h3><a href="{Permalink}">{Title}</a></h3>
+                                {/block:Title}{Body}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Text}
+
+                        {block:Photo}
+                            <li class="permapost photo">
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" />
+                                {LinkCloseTag}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Photo}
+
+                        {block:Panorama}
+                            <li class="permapost panorama">
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+                                {LinkCloseTag}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Panorama}
+
+                        {block:Photoset}
+                            <li class="permapost photoset">
+                                {Photoset-500}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Photoset}
+
+                        {block:Quote}
+                            <li class="permapost quote">
+                                <blockquote>"{Quote}"</blockquote>
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Quote}
+
+                        {block:Link}
+                            <li class="permapost link">
+                                <a href="{URL}" class="link" {Target}>{Name}</a>
+
+                                {block:Description}
+                                    <div class="description">{Description}</div>
+                                {/block:Description}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Link}
+
+                        {block:Chat}
+                            <li class="permapost chat">
+                                {block:Title}
+                                    <h3><a href="{Permalink}">{Title}</a></h3>
+                                {/block:Title}
+
+                                <ul class="chat">
+                                    {block:Lines}
+                                        <li class="{Alt} user_{UserNumber}">
+                                            {block:Label}
+                                                <span class="label">{Label}</span>
+                                            {/block:Label}{Line}
+                                        </li>
+                                    {/block:Lines}
+                                </ul>
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Chat}
+
+                        {block:Video}
+                            <li class="permapost video">
+                                {Video-500}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Video}
+
+                        {block:Audio}
+                            <li class="permapost audio">
+                                {AudioPlayerBlack}
+                                {block:ContentSource}
+                                    <div class="source">
+                                        {Source}
+                                        {lang:Source}:<a href="{SourceURL}">
+                                            {SourceTitle}
+                                        </a>
+                                    </div>
+                                {/block:ContentSource}
+                                {block:RebloggedFrom}
+                                    <div class="rblgfrom">
+                                        Rebloged from <a href="{ReblogParentURL}" target="{Target}">{ReblogParentName}</a>
+                                    </div>
+                                {/block:RebloggedFrom}
+                                {block:PostNotes}
+                                    {PostNotes-16}{PostNotes}
+                                {/block:PostNotes}
+                            </li>
+                        {/block:Audio}
+                    {/block:PermalinkPage}
+                {/block:Posts}
+            </ol>
+
+            <div class="navigation">
+                {block:NextPage}
+                    <a href="{NextPage}">Next &#187;</a>
+                {/block:NextPage}
+            </div>
+
+            <div id="footer">
+            </div>
+        </div>
+    <script src="http://static.tumblr.com/youzfzy/9c1mxxx2r/jquery-1.10.2.min.js"></script>
+    <script src="http://static.tumblr.com/youzfzy/Dlxmxxu0e/jquery.infinitescroll.min.js"></script>
+    <script>
+    $(function() {
+        $('#menuopener a').click(function() {
+            $('#menu').slideToggle();
+            return false;
+        });
+
+        $('#posts').infinitescroll({
+            navSelector: '.navigation',
+            nextSelector: '.navigation a',
+            itemSelector: '.post',
+            dataType: 'html'
+        });
+    });
+    </script>
+    </body>
+</html>
